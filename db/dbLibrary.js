@@ -14,7 +14,7 @@ var importer = mysqlImporter.config({
     onerror: err => console.log(err.message)
 });
 exports.createDB = function () {
-    importer.import('db.sql').then(() => {
+    importer.import('./db/db.sql').then(() => {
         console.log("La base de datos ha sido importada! :)");
     });
 }
