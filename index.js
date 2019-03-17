@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express()
-const db  = require('./db/dbLibrary.js');
+const db = require('./db/dbLibrary.js');
 var path = require('path');
 
 // db.createDB();
@@ -10,7 +10,7 @@ var path = require('path');
 // db.selectAllFrom("permission");
 // db.selectUser("root");
 
-app.get('/', function(request, response) {
+app.get('/', function (request, response) {
     response.sendFile(path.join(__dirname + '/public/login.html'));
 });
 app.use(express.static(path.join(__dirname, 'public')));

@@ -36,8 +36,8 @@ connection.connect((err) => {
  */
 exports.selectAllFrom = function (table) {
     connection.query("SELECT * FROM " + table, (err, rows) => {
-        if(err) throw err;
-        console.log('Datos recividos para la query de ' + table +  ':\n');
+        if (err) throw err;
+        console.log('Datos recividos para la query de ' + table + ':\n');
         console.log(rows);
     });
 }
@@ -45,11 +45,11 @@ exports.selectAllFrom = function (table) {
 /*
  *Seleccionar usuario especifico
  */
-exports.selectUser = function(user) {
+exports.selectUser = function (user) {
     var query = "SELECT * FROM users WHERE user_id = '" + user + "'";
     console.log(query);
-    connection.query( query, (err, rows) => {
-        if(err) throw err;
+    connection.query(query, (err, rows) => {
+        if (err) throw err;
         console.log("Datos de " + user + ":\n");
         console.log(rows);
     });
