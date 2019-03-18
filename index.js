@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express()
 const db = require('./db/dbLibrary.js');
+var bodyParser = require('body-parser');
 var path = require('path');
 
 // db.createDB();
@@ -13,8 +14,20 @@ var path = require('path');
 app.get('/', function (request, response) {
     response.sendFile(path.join(__dirname + '/public/login.html'));
 });
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.resolve('./public')));
 
-app.listen(3000, () => {
-    console.log('App running on port 3000')
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
+app.post('/log', function (request, response) {
+    console.error("\nHaciendo post\n");
+    var username = request.body.username;
+    var password = request.body.password;
+    console.log(username + "--" + password);
+});
+
+app.listen(3001, () => {
+    console.log('App running on port 3001')
 })
