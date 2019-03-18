@@ -22,10 +22,13 @@ app.use(bodyParser.json());
 
 
 app.post('/log', function (request, response) {
-    console.error("\nHaciendo post\n");
+    console.error("\nHaciendo post!!\n");
     var username = request.body.username;
     var password = request.body.password;
     console.log(username + "--" + password);
+    if(username && password){
+        db.selectUser(username);
+    }
 });
 
 app.listen(3001, () => {
