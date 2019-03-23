@@ -1,5 +1,8 @@
 # Login_system
 
+Para probar el programa hay que hacer lo siguiente:
+1. 
+
 # Author
 Luis Antonio Vázquez García
 <details>
