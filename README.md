@@ -1,7 +1,12 @@
 # Login_system
 
 Para probar el programa hay que hacer lo siguiente:
-1. 
+
+1. Clonar este repositorio
+2. Instalar MAMP
+3. Comenzar localhost desde MAMP
+4. En terminal escribir 'node index.js'
+5. Ir a http://localhost:3000
 
 # Author
 Luis Antonio Vázquez García
