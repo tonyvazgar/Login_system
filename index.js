@@ -1,6 +1,6 @@
-const express = require('express');
-const app = express()
-const db = require('./db/dbLibrary.js');
+var express = require('express');
+var app = express()
+var db = require('./db/dbLibrary.js');
 var bodyParser = require('body-parser');
 var path = require('path');
 
@@ -11,6 +11,10 @@ var path = require('path');
 // db.selectAllFrom("permission");
 // db.selectUser("root");
 
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.get('/', function (request, response) {
     response.sendFile(path.join(__dirname + '/public/login.html'));
 });
@@ -20,31 +24,30 @@ app.get('/home', function (request, response) {
     response.sendFile(path.join(__dirname + '/public/home.html'));
 });
 
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-
 app.post('/log', function (request, response) {
     console.error("\nHaciendo post!!\n");
     var username = request.body.username;
     var password = request.body.password;
     console.log(username + "--" + password);
-    var query = 'SELECT * FROM users WHERE user_id = ' + username + ' AND pass = ' +  password
-    console.log('***********' + query)
-    if(username && password){
-        //db.selectUser(username)
+
+    if (username && password) {
         db.connection.query('SELECT * FROM users WHERE user_id = ? AND pass = ?', [username, password], function (error, results, fields) {
-            console.log("Los resultados de la query son: " + results)
-            if (results.length > 0){
-                response.redirect('/public/home.html');
-            }else{
-                response.redirect('/')  //Redirección a pagina de login
+            console.log(results);
+            if (results.length > 0) {
+                response.redirect('/home');
+            } else {
+                //response.send('Usuario y contraseña erroneos!');
+                response.redirect('/flog');
             }
-        })
+            response.end();
+        });
     }
 });
 
+app.get('/flog', (request, response) => {
+    response.sendFile(path.join(__dirname + '/public/login.html'));
+});
+
 app.listen(3001, () => {
-    console.log('App running on port 3001')
-})
+    console.log('Acceso desde: http://localhost:3001')
+});

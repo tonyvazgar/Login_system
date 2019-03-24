@@ -13,11 +13,7 @@ var importer = mysqlImporter.config({
     socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock', //for mac and linux
     onerror: err => console.log(err.message)
 });
-exports.createDB = function () {
-    importer.import('./db/db.sql').then(() => {
-        console.log("La base de datos ha sido importada! :)");
-    });
-}
+
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -28,7 +24,14 @@ const connection = mysql.createConnection({
 });
 connection.connect((err) => {
     if (err) throw err;
-    console.log('Connected!');
+    console.log('Conectado a la base de datos!');
+    connection.query("CREATE DATABASE IF NOT EXISTS loginSystem", function (err, result) {
+        if (err) throw err;
+        console.log("Database created");
+    });
+});
+importer.import('./db/db.sql').then(() => {
+    console.log("La base de datos ha sido importada! :)");
 });
 
 /*
@@ -57,6 +60,17 @@ exports.selectUser = function (user) {
     });
     //return resizeBy
 }
+
+exports.userExists = function (user, pass) {
+    var exists = false;
+    connection.query('SELECT * FROM users WHERE user_id = ? AND pass = ?', [username, password], function (error, results, fields) {
+        if (results.length > 0) {
+            exists = true;
+        }
+    });
+    return exists
+}
+
 
 module.exports = {
     connection
