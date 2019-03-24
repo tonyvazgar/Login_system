@@ -6,7 +6,7 @@ Para probar el programa hay que hacer lo siguiente:
 2. Instalar MAMP
 3. Comenzar localhost desde MAMP
 4. En terminal escribir 'node index.js'
-5. Ir a http://localhost:3000
+5. Ir a http://localhost:3001
 
 # Author
 Luis Antonio Vázquez García

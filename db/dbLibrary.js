@@ -47,10 +47,17 @@ exports.selectAllFrom = function (table) {
  */
 exports.selectUser = function (user) {
     var query = "SELECT * FROM users WHERE user_id = '" + user + "'";
-    console.log(query);
+    //console.log(query);
+    //var response;
     connection.query(query, (err, rows) => {
         if (err) throw err;
         console.log("Datos de " + user + ":\n");
         console.log(rows);
+        //response = rows;
     });
+    //return resizeBy
+}
+
+module.exports = {
+    connection
 }
