@@ -26,6 +26,7 @@ app.get('/', function (request, response) {
     response.sendFile(path.join(__dirname + '/public/login.html'));
 });
 app.use(express.static(path.resolve('./public')));
+app.use(express.static(path.resolve('./db')));
 
 app.get('/home', function (request, response) {
     if(request.session.loggedin){

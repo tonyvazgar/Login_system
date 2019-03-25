@@ -1,5 +1,5 @@
-const mysqlImporter = require('mysql-import');
-const mysql = require('mysql');
+var mysqlImporter = require('mysql-import');
+var mysql = require('mysql');
 
 /*
  *Para importar el archivo db.sql en mySQL a traves de MAMP
