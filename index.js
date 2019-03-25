@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(session({
-    secret: 'millave',
+    secret: 'auri',
     resave: true,
     saveUninitialized: true
 }));
@@ -28,22 +28,14 @@ app.get('/', function (request, response) {
 app.use(express.static(path.resolve('./public')));
 
 app.get('/home', function (request, response) {
-
-    /*
-     
-    
-    
-     * ARRELGAR ESTOS IFS!!!!!
-
-
-
-     */
     if(request.session.loggedin){
-        response.send('/public/home.html');
+        response.sendFile(__dirname + '/public/home.html');
+        console.log('The user is already logged in');
     }else{
-        response.send('/public/login.html');
+        response.redirect('/flog');
+        console.log('The user must be logged!');
     }
-    response.end();
+    // response.end();
 });
 
 app.post('/log', function (request, response) {
@@ -54,12 +46,12 @@ app.post('/log', function (request, response) {
         db.connection.query('SELECT * FROM users WHERE user_id = ? AND pass = ?', [username, password], function (error, results, fields) {
             console.log("Los resultados de la query son: ", results);
             if (results.length > 0) {
-                console.log("Usuario logeado con exito!");
+                console.log("Login success!");
                 request.session.loggedin = true;
                 request.session.username = username;
                 response.redirect('/home');
             } else {
-                console.log("Error en contraseña, intenta de nuez");
+                console.log("Password error, try again!");
                 response.redirect('/flog');
             }
             response.end();
