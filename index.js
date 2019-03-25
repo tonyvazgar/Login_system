@@ -30,7 +30,7 @@ app.use(express.static(path.resolve('./public')));
 app.get('/home', function (request, response) {
     if(request.session.loggedin){
         response.sendFile(__dirname + '/public/home.html');
-        console.log('The user is already logged in');
+        console.log('The user is already logged!');
     }else{
         response.redirect('/flog');
         console.log('The user must be logged!');
